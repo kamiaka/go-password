@@ -1,5 +1,5 @@
-# go-password
-[![GoDoc](https://godoc.org/github.com/kamiaka/go-password?status.svg)](https://godoc.org/github.com/kamiaka/go-password)
+# go-secret
+[![GoDoc](https://godoc.org/github.com/kamiaka/go-secret?status.svg)](https://godoc.org/github.com/kamiaka/go-secret)
 
 Not easily displayed string for Go.
 But almost can treat like as normal string.
@@ -8,13 +8,13 @@ But almost can treat like as normal string.
 
 ```go
 type request struct {
-  Username string   `json:"username"`
-  Password Password `json:"password"`
+  Username string `json:"username"`
+  Password Secret `json:"secret"`
 }
   :
 req := &request{
   Username: "john",
-  Password: Password("my-secret-password!"),
+  Password: "my-secret!",
 }
 fmt.Printf("req: %#v\n", req)
 
@@ -25,8 +25,8 @@ fmt.Printf("json: %s\n", js)
 ### Output
 
 ```
-req: &password.request{Username:"john", Password:"****"}
-json: {"username":"john","password":"my-secret-password!"}
+req: &secret.request{Username:"john", Password:"****"}
+json: {"username":"john","password":"my-secret!"}
 ```
 
 ### Want literal?
@@ -34,7 +34,7 @@ json: {"username":"john","password":"my-secret-password!"}
 Convert to string.
 
 ```go
-regexp.MustCompile(`^[a-z!-]+$`).MatchString(string(password)) // true
+regexp.MustCompile(`^[a-z!-]+$`).MatchString(string(secret)) // true
 ```
 
 ## Caution!
@@ -42,12 +42,12 @@ regexp.MustCompile(`^[a-z!-]+$`).MatchString(string(password)) // true
 If you use the plus operator, you may not get the result you imagined.
 
 ```go
-password := Password("secret")
+secret := Secret("secret")
 
-str := "my password is " + password // Password("my password is secret")
+str := "my secret is " + secret // Secret("my secret is secret")
 
 fmt.Println(str)         // ****
-fmt.Println(string(str)) // my password is secret
+fmt.Println(string(str)) // my secret is secret
 ```
 
 ## License
