@@ -1,3 +1,5 @@
+// Package password is not easily displayed string for Go.
+// But almost can treat like as normal string.
 package password
 
 import (
