@@ -8,6 +8,10 @@ import (
 )
 
 // Password is not easily displayed string.
+//
+// Example:
+//   password := Password("secret")
+//   fmt.Print(password) // print `****`
 type Password string
 
 // Format password.
