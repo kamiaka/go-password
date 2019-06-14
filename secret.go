@@ -14,7 +14,8 @@ import (
 //   fmt.Print(secret) // print `****`
 type Secret string
 
-// Format secret.
+// Format implements fmt.Formatter.
+// Each format treat as `secret.Secret("****")`
 func (p Secret) Format(s fmt.State, v rune) {
 	switch v {
 	case 'v', 's':
